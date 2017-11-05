@@ -1,45 +1,60 @@
 package main;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
-		int[] arrInt = new int[10];
+		Scanner scan = new Scanner(System.in);
+		int n = 10;
+		int Search ;
+		int[] arrInt = new int[n];
 		
 		Random rand = new Random();
-		for(int i = 0 ;i<10;i++)
+		for(int i = 0 ;i<n;i++)
 		{
-			//arrInt[i] = rand.nextInt(10);
+			//arrInt[i] = rand.nextInt(100);
 			arrInt[i] = i;
+//			while (arrInt[i]== 0)
+//			{
+//				arrInt[i] = rand.nextInt(100);
+//			}
 		}
-		
-		//PrintArray(arrInt);
-		//bubbleSort(arrInt,10);
-		//PrintArray(arrInt);
-		BinarySearch(arrInt,4,10);
+		System.out.println("Tablica przed sortowaniem ");
+		PrintArray(arrInt);
+		bubbleSort(arrInt,n);
+		System.out.println("\nTablica po sortowaniem ");
+		PrintArray(arrInt);
+		//do {
+		//	System.out.println("Czego szukasz, 0-> koniec: ");
+		//	Search = scan.nextInt();
+			BinarySearch(arrInt,7,n);
+
+		//}while (Search!=0);
 	}
 	public static void PrintArray(int[] arrayInt)
 	{
-		for ( int i = 0 ;i<10;i++)
-		{
-			System.out.print(i+" ");
-		}
-		System.out.println("");
-		for ( int i = 0 ;i<10;i++)
+		
+		
+		for ( int i = 0 ;i<arrayInt.length;i++)
 		{
 			System.out.print(arrayInt[i]+ " ");
+			if(i%10==0 &&  i!= 0)
+			{
+				System.out.println("");
+			}
 		}
 		System.out.println("");
 	}
 	
-	public static void PrintArray(int[] arrayInt,int n)
+	public static void PrintArray(int[] arrayInt,int n)//this method is used to test array 
 	{
-		for ( int i = 0 ;i<10;i++)
-		{
-			System.out.print(i+" ");
-		}
-		System.out.println("");
+//		for ( int i = 0 ;i<10;i++)
+//		{
+//			System.out.print(i+" ");
+//		}
+//		System.out.println("");
 		for ( int i = 0 ;i<10;i++)
 		{
 			if (i==n)
@@ -75,20 +90,30 @@ public class Main {
 
 	public static void BinarySearch(int[] arrayInt,int Search,int n)
 	{
-		
+		System.out.println(Search + " " + n);
 		int i = 0;
-		i = (n/2)-1;
-		int wybrana  =arrayInt[i];
+		n=n/2;
+		i = --n;
+		int wybrana  ;
+		wybrana =arrayInt[i];
 		Boolean koniec= true;
 		do {
-			wybrana =arrayInt[i];
+		
 			if (wybrana>Search)
 			{
-				i = (i /2);
+				n=n/2;
+				i =i- n-1;
+				PrintArray(arrayInt,i);
+				System.out.println(wybrana + " " + i);
+				
 			}
 			else if (wybrana<Search)
 			{
-				i = i+(i/2);
+				n=n/2;
+				i = i+n+1;
+				PrintArray(arrayInt,i);
+				System.out.println(wybrana + " " + i);
+				
 			}
 			else if (wybrana==Search)
 			{
@@ -112,6 +137,17 @@ public class Main {
 				System.out.println("lose");
 				koniec = false;
 			}
+			else if (i < n)  
+			{
+				System.out.println("lose");
+				koniec = false;
+			}
+			else 
+			{
+				wybrana =arrayInt[i];
+			}
+			System.out.println(wybrana + " " + i);
+			
 
 		}while(koniec);
 	}
