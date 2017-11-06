@@ -14,24 +14,30 @@ public class Main {
 		Random rand = new Random();
 		for(int i = 0 ;i<n;i++)
 		{
-			//arrInt[i] = rand.nextInt(100);
-			arrInt[i] = i;
-//			while (arrInt[i]== 0)
-//			{
-//				arrInt[i] = rand.nextInt(100);
-//			}
+			arrInt[i] = rand.nextInt(100);
+			//arrInt[i] = i;
+			while (arrInt[i]== 0)
+			{
+				arrInt[i] = rand.nextInt(100);
+			}
 		}
 		System.out.println("Tablica przed sortowaniem ");
 		PrintArray(arrInt);
 		bubbleSort(arrInt,n);
 		System.out.println("\nTablica po sortowaniem ");
 		PrintArray(arrInt);
-		//do {
-		//	System.out.println("Czego szukasz, 0-> koniec: ");
-		//	Search = scan.nextInt();
-			BinarySearch(arrInt,7,n);
+		do {
+			System.out.println("Czego szukasz, 0-> koniec: ");
+			Search = scan.nextInt();
+			BinarySearch(arrInt,Search,n);
+//		for ( int i =0 ;i<10;i++)
+//		{
+//			BinarySearch(arrInt,i,n);
+//		}
 
-		//}while (Search!=0);
+		}while (Search!=0);
+		System.out.println("Czego szukasz, 0-> koniec: ");
+
 	}
 	public static void PrintArray(int[] arrayInt)
 	{
@@ -92,30 +98,37 @@ public class Main {
 	{
 		System.out.println(Search + " " + n);
 		int i = 0;
-		n=n/2;
-		i = --n;
+		int tmp = n;
+		i = (n/2)-1;
+		tmp = tmp/2;
 		int wybrana  ;
 		wybrana =arrayInt[i];
+		//PrintArray(arrayInt,i);
 		Boolean koniec= true;
 		do {
 		
 			if (wybrana>Search)
 			{
-				n=n/2;
-				i =i- n-1;
-				PrintArray(arrayInt,i);
-				System.out.println(wybrana + " " + i);
+				tmp = tmp/2;
+				i = i/2;
+			//	PrintArray(arrayInt,i);
+				wybrana =arrayInt[i];
+			//	System.out.println(Search+ " "+wybrana + " " + i + " " +n+ " "+ tmp);
 				
 			}
 			else if (wybrana<Search)
 			{
-				n=n/2;
-				i = i+n+1;
-				PrintArray(arrayInt,i);
-				System.out.println(wybrana + " " + i);
-				
+				tmp = tmp /2 ;
+				if (tmp == 0 )
+				{
+					tmp = 1;
+				}
+				i = (i + tmp);				
+//				PrintArray(arrayInt,i);
+				wybrana =arrayInt[i];
+//				System.out.println(Search+ " "+wybrana + " " + i + " " +n + " "+ tmp);		
 			}
-			else if (wybrana==Search)
+			if (wybrana==Search)
 			{
 				koniec = false;
 				System.out.println("win");
@@ -137,16 +150,13 @@ public class Main {
 				System.out.println("lose");
 				koniec = false;
 			}
-			else if (i < n)  
+			else if ( i < 0)
 			{
 				System.out.println("lose");
 				koniec = false;
 			}
-			else 
-			{
-				wybrana =arrayInt[i];
-			}
-			System.out.println(wybrana + " " + i);
+			
+			//System.out.println(wybrana + " " + i);
 			
 
 		}while(koniec);
